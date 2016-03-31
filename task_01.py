@@ -25,15 +25,18 @@ def sum_orders(customers, orders):
         'name': 'jon lieberman', 'email': 'embedded@100.com'}}
     """
     totalordered = {}
-    for customerid, total in customers.iteritems():  # Loop customers dict
+    for cust_id, total in customers.iteritems():  # Loop customers dict
         order_qty = 0  # Reset order counter
         order_amt = 0  # Reset total orders sum for same customer
         for orderkey, order in orders.iteritems():  # Loop orders dict
-            if customerid == order['customer_id']:  # Pair customer IDs
+            if cust_id == order['customer_id']:  # Pair customer IDs
                 order_qty += 1  # Update order counter for each match
                 order_amt += order['total']  # Update running sum for ID
-            totalordered[customerid] = {'name': customers[customerid]['name'],
-                                        'email': customers[customerid]['email'],
-                                        'orders': order_qty,
-                                        'total': order_amt}  # Insert keyvals
+            if order_qty > 0:
+                totalordered[cust_id] = {'email': customers[cust_id]['email'],
+                                         'name': customers[cust_id]['name'],
+                                         'orders': order_qty,
+                                         'total': order_amt}  # Insert keyvals
+            else:
+                pass
     return totalordered
