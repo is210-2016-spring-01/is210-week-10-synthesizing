@@ -16,14 +16,21 @@ def sum_orders(customers, orders):
         customers = CUSTOMERS
     if not orders:
         orders = ORDERS
+
     order_up = {}
+
     for key, value in customers.iteritems():
         orderinos = 0
-        numbah = 1
+        numbah = 0
+
         for order_id in orders.values():
+
             if key == (order_id['customer_id']):
-                order_up[key] = {'name': value['name'], 'email': value['email'],
-                                 'orders': numbah, 'total': orderinos}
                 orderinos += order_id['total']
                 numbah += 1
+                order_up[key] = {'name': value['name'],
+                                 'email': value['email'],
+                                 'orders': numbah,
+                                 'total': orderinos}
+
     return order_up
